@@ -21,9 +21,15 @@ spec:
         resources:
 {{ toYaml .Values.resources | indent 10 }}
         volumeMounts:
+        - name: varrunutmpro
+          mountPath: /var/run/utmp
+          readOnly: true
         - name: config
           mountPath: /etc/telegraf
       volumes:
+      - name: varrunutmpro
+        hostPath:
+          path: /var/run/utmp
       - name: config
         configMap:
           name: {{ template "fullname" . }}
