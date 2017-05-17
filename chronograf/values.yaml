@@ -1,9 +1,9 @@
 ## Image Settings
 ##
 image:
-  repository: "quay.io/influxdb/chronograf"
-  tag: "latest"
-  pullPolicy: "Always"
+  repository: "chronograf"
+  tag: "1.3-alpine"
+  pullPolicy: IfNotPresent
 
 ## Specify a service type
 ## ClusterIP is default
@@ -11,7 +11,7 @@ image:
 ##
 service:
   replicas: 1
-  type: LoadBalancer
+  type: ClusterIP
 
 ## Persist data to a persitent volume
 ##

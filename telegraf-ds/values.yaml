@@ -3,7 +3,7 @@
 ## ref: https://hub.docker.com/r/library/telegraf/tags/
 image:
   repo: "telegraf"
-  tag: "1.2.1-alpine"
+  tag: "1.3-alpine"
   pullPolicy: IfNotPresent
 
 ## Configure resource requests and limits
@@ -49,3 +49,5 @@ config:
       timeout: "5s"
       perdevice: true
       total: false
+      docker_label_exclude:
+        - "annotation.kubernetes.io/*"

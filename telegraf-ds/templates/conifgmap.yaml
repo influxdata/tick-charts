@@ -53,6 +53,11 @@ data:
       timeout = {{ .Values.config.inputs.docker.timeout | quote }}
       perdevice = {{ .Values.config.inputs.docker.perdevice }}
       total = {{ .Values.config.inputs.docker.total }}
+      docker_label_exclude = [
+      {{- range $i, $str := .Values.config.inputs.docker.docker_label_exclude }}
+        {{ $str | quote }},
+      {{- end }}
+      ]
     [[inputs.kernel]]
     [[inputs.kubernetes]]
       url = {{ .Values.config.inputs.kubernetes.url | quote }}
