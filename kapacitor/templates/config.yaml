@@ -55,7 +55,7 @@ data:
         _kapacitor = ["autogen"]
     [logging]
       file = "STDERR"
-      level = "INFO"
+      level = "DEBUG"
     [config-override]
       enabled = true
     [collectd]
@@ -184,6 +184,7 @@ data:
       id = "kubernetes-default"
       enabled = true
       in-cluster = true
+      resource = "pod"
     [[scraper]]
       enabled = true
       name = "prometheus-scrape"
