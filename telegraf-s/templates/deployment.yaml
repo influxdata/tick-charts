@@ -23,7 +23,13 @@ spec:
         volumeMounts:
         - name: config
           mountPath: /etc/telegraf
+        - name: varrunutmpro
+          mountPath: /var/run/utmp
+          readOnly: true
       volumes:
+      - name: varrunutmpro
+        hostPath:
+          path: /var/run/utmp
       - name: config
         configMap:
           name: {{ template "fullname" . }}

@@ -16,7 +16,7 @@ data:
     [http]
       bind-address = ":9092"
       auth-enabled = false
-      log-enabled = true
+      log-enabled = false
       write-tracing = false
       pprof-enabled = false
       https-enabled = false
@@ -55,7 +55,7 @@ data:
         _kapacitor = ["autogen"]
     [logging]
       file = "STDERR"
-      level = "DEBUG"
+      level = "INFO"
     [config-override]
       enabled = true
     [collectd]
@@ -177,18 +177,69 @@ data:
     [deadman]
       interval = "10s"
       threshold = 0.0
-      id = "{{ .Group }}:NODE_NAME for task '{{ .TaskName }}'"
+      id = "{{ .Group }}"
       message = "{{ .ID }}"
       global = false
-    [kubernetes]
-      id = "kubernetes-default"
+    [[kubernetes]]
+      id = "kubernetes-pod"
       enabled = true
       in-cluster = true
       resource = "pod"
+    [[kubernetes]]
+      id = "kubernetes-node"
+      enabled = true
+      in-cluster = true
+      resource = "node"
+    [[kubernetes]]
+      id = "kubernetes-service"
+      enabled = true
+      in-cluster = true
+      resource = "service"
+    [[kubernetes]]
+      id = "kubernetes-endpoint"
+      enabled = true
+      in-cluster = true
+      resource = "endpoint"
     [[scraper]]
       enabled = true
-      name = "prometheus-scrape"
-      discoverer-id = "kubernetes-default"
+      name = "prometheus-node"
+      discoverer-id = "kubernetes-node"
+      discoverer-service = "kubernetes"
+      db = "prometheus_raw"
+      rp = "autogen"  
+      type = "prometheus"
+      scheme = "http"
+      metrics-path = "/metrics"
+      scrape-interval = "10s"
+      scrape-timeout = "10s"
+    [[scraper]]
+      enabled = true
+      name = "prometheus-pod"
+      discoverer-id = "kubernetes-pod"
+      discoverer-service = "kubernetes"
+      db = "prometheus_raw"
+      rp = "autogen"
+      type = "prometheus"
+      scheme = "http"
+      metrics-path = "/metrics"
+      scrape-interval = "10s"
+      scrape-timeout = "10s"
+    [[scraper]]
+      enabled = true
+      name = "prometheus-service"
+      discoverer-id = "kubernetes-service"
+      discoverer-service = "kubernetes"
+      db = "prometheus_raw"
+      rp = "autogen"
+      type = "prometheus"
+      scheme = "http"
+      metrics-path = "/metrics"
+      scrape-interval = "10s"
+      scrape-timeout = "10s"
+    [[scraper]]
+      enabled = true
+      name = "prometheus-endpoint"
+      discoverer-id = "kubernetes-endpoint"
       discoverer-service = "kubernetes"
       db = "prometheus_raw"
       rp = "autogen"

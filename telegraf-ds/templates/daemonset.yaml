@@ -30,6 +30,9 @@ spec:
         - name: "HOST_SYS"
           value: "/rootfs/sys"
         volumeMounts:
+        - name: varrunutmpro
+          mountPath: /var/run/utmp
+          readOnly: true
         - name: sysro
           mountPath: /rootfs/sys
           readOnly: true
@@ -38,9 +41,6 @@ spec:
           readOnly: true
         - name: docker-socket
           mountPath: /var/run/docker.sock
-        - name: varrunutmpro
-          mountPath: /var/run/utmp
-          readOnly: true
         - name: config
           mountPath: /etc/telegraf
       volumes:
