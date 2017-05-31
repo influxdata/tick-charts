@@ -7,7 +7,7 @@
 ## QuickStart
 
 ```bash
-$ helm install stable/kapacitor --name foo --namespace bar
+$ helm install --wait stable/kapacitor --name foo --namespace bar
 ```
 
 ## Introduction
@@ -24,7 +24,7 @@ This chart bootstraps A Kapacitor deployment and service on a Kubernetes cluster
 To install the chart with the release name `my-release`:
 
 ```bash
-$ helm install --name my-release stable/kapacitor
+$ helm install --wait --name my-release stable/kapacitor
 ```
 
 The command deploys Kapacitor on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
@@ -64,6 +64,22 @@ $ helm install --name my-release -f values.yaml stable/kapacitor
 ```
 
 > **Tip**: You can use the default [values.yaml](values.yaml)
+
+## Automatic TICK script installation
+
+TICK scripts can be installed from a specified directory via a Kubernetes job
+with Helm `post-install` and `post-upgrade` hooks. It's disabled by default. To
+enable use:
+
+```bash
+$ helm install --name my-release \
+  --set "install_tick_scripts.enabled=true" \
+  --set "install_tick_scripts.tick_dir=/tick" \
+  --set "install_tick_scripts.kapacitorURL=http://kapacitor:9092" \
+  -f values.yaml stable/kapacitor
+```
+
+Or modify the default values in `values.yaml`.
 
 ## Persistence
 
