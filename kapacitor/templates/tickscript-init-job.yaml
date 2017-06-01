@@ -12,7 +12,7 @@ metadata:
 data:
   init.sh: |-
     #!/usr/bin/env bash
-    export KAPACITOR_URL={{ .Values.install_tick_scripts.kapacitorURL }}
+    export KAPACITOR_URL="{{ template "fullname" . }}.{{ .Release.Namespace }}:9092"
     ls -al $TICK_DIR
     kapacitor list tasks
 

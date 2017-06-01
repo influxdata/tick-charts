@@ -72,10 +72,9 @@ with Helm `post-install` and `post-upgrade` hooks. It's disabled by default. To
 enable use:
 
 ```bash
-$ helm install --name my-release \
+helm install --name my-release \
   --set "install_tick_scripts.enabled=true" \
   --set "install_tick_scripts.tick_dir=/tick" \
-  --set "install_tick_scripts.kapacitorURL=http://kapacitor:9092" \
   -f values.yaml stable/kapacitor
 ```
 
