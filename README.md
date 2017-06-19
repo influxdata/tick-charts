@@ -27,7 +27,7 @@ $ helm install --name dash --namespace tick ./chronograf/
 ```
 - Wait for the IP for chronograf to appear:
 ```bash
-$ kubectl get svc -w --namespace tick -l app dash-chronograf
+$ kubectl get svc -w --namespace tick -l app=dash-chronograf
 ```
 - Open chronograf in your browser and configure it
   - InfluxDB URL: `http://data-influxdb.tick:8086`
