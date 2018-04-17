@@ -1,6 +1,6 @@
 ## Image Settings
 ## 
-## ref: https://hub.docker.com/_/chronograf/
+## ref: https://hub.docker.com/r/library/chronograf/tags/
 image:
   repository: "chronograf"
   tag: "1.4.3.1-alpine"
