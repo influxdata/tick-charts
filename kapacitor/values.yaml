@@ -1,9 +1,9 @@
 ## kapacitor image version
-## ref: https://hub.docker.com/r/library/influxdb/tags/
+## ref: https://hub.docker.com/r/library/kapacitor/tags/
 ##
 image:
   repository: "kapacitor"
-  tag: "1.3-alpine"
+  tag: "1.4.1-alpine"
   pullPolicy: "IfNotPresent"
 
 ## Specify a service type, defaults to NodePort
@@ -36,6 +36,6 @@ resources:
     cpu: 2
     
 ## Set the URL of InfluxDB instance to create subscription on
-## ref: https://docs.influxdata.com/kapacitor/v1.1/introduction/getting_started/
+## ref: https://docs.influxdata.com/kapacitor/v1.4/introduction/getting_started/
 ##
 influxURL: http://data-influxdb.tick:8086
