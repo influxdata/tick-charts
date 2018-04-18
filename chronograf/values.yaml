@@ -1,8 +1,9 @@
 ## Image Settings
-##
+## 
+## ref: https://hub.docker.com/r/library/chronograf/tags/
 image:
   repository: "chronograf"
-  tag: "1.3-alpine"
+  tag: "1.4.3.1-alpine"
   pullPolicy: IfNotPresent
 
 ## Specify a service type
@@ -49,7 +50,7 @@ ingress:
     # kubernetes.io/tls-acme: "true"
 
 ## OAuth Settings for OAuth Providers
-## More information -> https://github.com/influxdata/chronograf/blob/master/docs/auth.md
+## More information -> https://docs.influxdata.com/chronograf/v1.4/administration/managing-security/
 ##
 oauth:
   # Need to set to true to use any of the oauth options
