@@ -1,6 +1,6 @@
 name: kapacitor
-version: 1.3.0
-description: InfluxDB's native data processing engine. It can process both stream and batch data from InfluxDB.
+version: 1.4.1
+description: InfluxDB's co-processing processing engine. It can process both stream and batch data from InfluxDB.
 keywords:
 - kapacitor
 - stream
@@ -10,6 +10,6 @@ home: https://www.influxdata.com/time-series-platform/kapacitor/
 sources:
   - https://github.com/influxdata/kapacitor
 maintainers:
-- name: Jack Zampolin
-  email: jack@influxdb.com
+- name: 
+  email: 
 engine: gotpl
