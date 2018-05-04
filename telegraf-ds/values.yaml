@@ -3,7 +3,7 @@
 ## ref: https://hub.docker.com/r/library/telegraf/tags/
 image:
   repo: "telegraf"
-  tag: "1.5.3-alpine"
+  tag: "1.6.1-alpine"
   pullPolicy: IfNotPresent
 
 ## Configure resource requests and limits
