@@ -48,3 +48,13 @@ This will create a file named `{{ .Chart.Name }}-{{ .Chart.Version }}.tgz` that 
 ```bash
 $ helm install telegraf-0.1.0.tgz --name {{ .Release.Name }} --namespace {{ .Release.Namespace }} --values /path/to/my_values.yaml
 ```
+
+#### Using Influx Helm repo
+
+All the charts are also available in Influx's Helm repository. You can use it as so:
+
+```
+$ helm repo add influx http://influx-charts.storage.googleapis.com
+$ helm install influx/telegraf-ds
+```
+
