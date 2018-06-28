@@ -5,7 +5,7 @@ image:
   repo: "telegraf"
   tag: "1.6.3-alpine"
   pullPolicy: IfNotPresent
-          
+
 ## Configure resource requests and limits
 ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
 resources:
@@ -15,7 +15,7 @@ resources:
   limits:
     memory: 2Gi
     cpu: 1
-    
+
 ## Configure the service for this telegraf instance. If you are running
 ## Any of the service plugins you will need this enabled
 ## Service Plugins: http_listener, statsd, tcp_listener, udp_listener
@@ -23,7 +23,7 @@ resources:
 service:
   enabled: true
   type: ClusterIP
-  
+
 ## Exposed telegraf configuration
 ## For full list of possible values see `/docs/all-config-values.yaml` and `/docs/all-config-values.toml`
 ## ref: https://docs.influxdata.com/telegraf/v1.5/administration/configuration/
@@ -76,7 +76,7 @@ config:
 ##        insecure_skip_verify: false
 ##        data_format: "influx"
 ##      kafka:
-##        brokers: 
+##        brokers:
 ##          - "localhost:9092"
 ##        topic: "telegraf"
 ##        routing_tag: "host"
@@ -89,7 +89,7 @@ config:
 ##        insecure_skip_verify: false
 ##        data_format: "influx"
 ##      mqtt:
-##        servers: 
+##        servers:
 ##          - "localhost:1883"
 ##        topic_prefix: "telegraf"
 ##        username: "telegraf"
@@ -100,7 +100,7 @@ config:
 ##        insecure_skip_verify: false
 ##        data_format: "influx"
 ##      nats:
-##        servers: 
+##        servers:
 ##          - "nats://localhost:4222"
 ##        username: ""
 ##        password: ""
@@ -118,19 +118,19 @@ config:
 # CPU and System is required for chronograf
 # This may show errors in the logs, but this does not affect performance or functionality
   inputs:
-    cpu:
-      percpu: false
-      totalcpu: true
-    system:
+##    cpu:
+##      percpu: false
+##      totalcpu: true
+##    system:
 ##      aerospike:
-##        servers: 
+##        servers:
 ##          - "localhost:3000"
 ##      apache:
-##        urls: 
+##        urls:
 ##          - "http://localhost/server-status?auto"
 ##      cassandra:
 ##        context: "/jolokia/read"
-##        servers: 
+##        servers:
 ##          - "myuser:mypassword@10.10.10.1:8778"
 ##          - "10.10.10.2:8778"
 ##          - ":8778"
@@ -152,8 +152,8 @@ config:
 ##        namespace: "AWS/ELB"
 ##        ratelimit: 10
 ##        metrics:
-##         names: 
-##          - "Latency" 
+##         names:
+##          - "Latency"
 ##          - "RequestCount"
 ##         dimensions:
 ##           name: "LoadBalancerName"
@@ -166,30 +166,30 @@ config:
 ##        password: ""
 ##        datacentre: ""
 ##      couchbase:
-##        servers: 
+##        servers:
 ##          - "http://localhost:8091"
 ##      couchdb:
-##        hosts: 
+##        hosts:
 ##          - "http://localhost:8086/_stats"
 ##      disque:
-##        servers: 
+##        servers:
 ##          - "localhost"
 ##      dns_query:
-##        servers: 
+##        servers:
 ##          - "8.8.8.8"
-##        domains: 
+##        domains:
 ##          - "."
 ##        record_type: "A"
 ##        port: 53
 ##        timeout: 2
 ##      dovecot:
-##        servers: 
+##        servers:
 ##          - "localhost:24242"
 ##        type: "global"
 ##        filters:
 ##          - ""
 ##      elasticsearch:
-##        servers: 
+##        servers:
 ##          - "http://localhost:9200"
 ##        http_timeout: "5s"
 ##        local: true
@@ -211,7 +211,7 @@ config:
 ##        ssl_key: "/etc/telegraf/key.pem"
 ##        insecure_skip_verify: false
 ##      haproxy:
-##        servers: 
+##        servers:
 ##          - "http://myhaproxy.com:1936/haproxy?stats"
     influxdb:
       urls:
@@ -234,13 +234,13 @@ config:
 ##        days_old: 0
 ##        campaign_id: ""
 ##      memcached:
-##        servers: 
+##        servers:
 ##          - "localhost:11211"
 ##        unix_sockets:
 ##          - "/var/run/memcached.sock"
 ##      mesos:
 ##        timeout: 100
-##        masters: 
+##        masters:
 ##          - "localhost:5050"
 ##        master_collections:
 ##          - "resources"
@@ -253,7 +253,7 @@ config:
 ##          - "evqueue"
 ##          - "registrar"
 ##        slaves:
-##          - 
+##          -
 ##        slave_collections:
 ##          - "resources"
 ##          - "agent"
@@ -262,11 +262,11 @@ config:
 ##          - "tasks"
 ##          - "messages"
 ##      mongodb:
-##        servers: 
+##        servers:
 ##          - "mongodb://user:password@127.0.0.1:27017"
 ##        gather_perdb_stats: false
 ##      mysql:
-##        servers: 
+##        servers:
 ##          - "tcp(127.0.0.1:3306)?tls=false"
 ##        perf_events_statements_digest_text_limit : 120
 ##        perf_events_statements_limit: 250
@@ -292,16 +292,16 @@ config:
 ##        expect: "ssh"
 ##        read_timeout: "1s"
 ##      nginx:
-##        urls: 
+##        urls:
 ##          - "http://nginx.kube-system:18080/status"
 ##      nsq:
-##        endpoints: 
+##        endpoints:
 ##          - "http://localhost:4151"
 ##      phpfpm:
-##        urls: 
+##        urls:
 ##          - "http://localhost/status"
 ##      ping:
-##        urls: 
+##        urls:
 ##          - "www.google.com"
 ##        count: 1
 ##        ping_interval: 1.0
@@ -309,13 +309,13 @@ config:
 ##        interface: ""
 ##      postgresql:
 ##        address: "postgres://user:password@localhost?sslmode=disable"
-##        ignored_databases: 
+##        ignored_databases:
 ##          - "postgres"
-##        databases: 
+##        databases:
 ##          - "app_production"
 ##          - "testing"
 ##     prometheus:
-##       urls: 
+##       urls:
 ##         - "https://kubernetes.default:443/metrics"
 ##       name_prefix: "prom_"
 ##       bearer_token: "/var/run/secrets/kubernetes.io/serviceaccount/token"
@@ -332,31 +332,31 @@ config:
 ##       ssl_cert: "/etc/telegraf/cert.pem"
 ##       ssl_key: "/etc/telegraf/key.pem"
 ##       insecure_skip_verify: false
-##       nodes: 
+##       nodes:
 ##         - "rabbit@node1"
 ##         - "rabbit@node2"
 ##     raindrops:
-##       urls: 
+##       urls:
 ##         - "http://localhost:8080/_raindrops"
 ##     redis:
-##       servers: 
+##       servers:
 ##         - "tcp://localhost:6379"
 ##     rethinkdb:
-##       servers: 
+##       servers:
 ##         - "127.0.0.1:28015"
 ##     riak:
-##       servers: 
+##       servers:
 ##         - "http://localhost:8098"
 ##     sqlserver:
 ##       servers:
 ##         - "Server=192.168.1.10;Port=1433;User Id=<user>;Password=<pw>;app name=telegraf;log=1;"
 ##     twemproxy:
 ##       addr: "localhost:22222"
-##        pools: 
+##        pools:
 ##          - "redis_pool"
 ##          - "mc_pool"
 ##      zookeeper:
-##        servers: 
+##        servers:
 ##          - "localhost:2181"
 ##      http_listener:
 ##        service_address: ":8186"
@@ -366,7 +366,7 @@ config:
 ##        max_line_size: 0
     statsd:
       service_address: ":8125"
-      percentiles: 
+      percentiles:
         - 50
         - 95
         - 99
