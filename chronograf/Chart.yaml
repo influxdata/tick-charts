@@ -7,6 +7,6 @@ keywords:
 - timeseries
 home: https://www.influxdata.com/time-series-platform/chronograf/
 maintainers:
-- name: 
-  email: 
+- name:  
+- email: 
 engine: gotpl
