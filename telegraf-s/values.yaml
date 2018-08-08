@@ -219,7 +219,7 @@ config:
       timeout: "5s"
     kapacitor:
       urls:
-        - "http://kap-kapacitor.tick:9092/debug/vars"
+        - "http://alerts-kapacitor.tick:9092/debug/vars"
       timeout: "5s"
 ##      lustre2:
 ##        ost_procfiles:
