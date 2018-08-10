@@ -36,6 +36,6 @@ resources:
     cpu: 2
     
 ## Set the URL of InfluxDB instance to create subscription on
-## ref: https://docs.influxdata.com/kapacitor/v1.4/introduction/getting_started/
+## ref: https://docs.influxdata.com/kapacitor/v1.5/introduction/getting_started/
 ##
 influxURL: http://data-influxdb.tick:8086
