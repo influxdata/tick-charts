@@ -1,5 +1,5 @@
 name: kapacitor
-version: 1.5.0
+version: 1.5.1
 description: InfluxDB's co-processing processing engine. It can process both stream and batch data from InfluxDB.
 keywords:
 - kapacitor
