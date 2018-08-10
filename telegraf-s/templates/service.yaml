@@ -1,14 +1,17 @@
 {{- if .Values.service.enabled -}}
+{{- if .Values.service.enabled -}}
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "fullname" . }}
+  name: {{ template "fullname" . }}-s
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
 spec:
   type: {{ .Values.service.type }}
   ports:
-  {{- range $key, $value := .Values.config.inputs }}
+  {{- range $objectKey, $objectValue := .Values.config.inputs }}
+  {{- range $key, $value := . -}}
+    {{- $tp := typeOf $value -}}
     {{- if eq $key "http_listener" }}
   - port: {{ trimPrefix ":" $value.service_address | int64 }}
     targetPort: {{ trimPrefix ":" $value.service_address | int64 }}
@@ -36,7 +39,9 @@ spec:
     targetPort: {{ trimPrefix ":" $value.service_address | int64 }}
     name: "webhooks"
     {{- end }}
+  {{- end -}}
   {{- end }}
   selector:
-    app: {{ template "fullname" . }}
+    app: {{ template "fullname"  .}}-s
+{{- end -}}
 {{- end -}}
