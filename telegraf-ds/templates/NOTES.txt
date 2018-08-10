@@ -1,10 +1,3 @@
-{{- if empty .Values.config.outputs.influxdb.url }}
-
-Need to set an InfluxDB url to deploy this instance:
-
-.Values.config.outputs.influxdb.url
-
-{{- else }}
 To open a shell session in the container running Telegraf run the following:
 
 - kubectl exec -i -t --namespace {{ .Release.Namespace }} $(kubectl get pods --namespace {{ .Release.Namespace }} -l app={{ template "fullname" . }} -o jsonpath='{.items[0].metadata.name}') /bin/sh
@@ -16,5 +9,3 @@ To tail the logs for a Telegraf pod in the Daemonset run the following:
 To list the running Telegraf instances run the following:
 
 - kubectl get pods --namespace {{ .Release.Namespace }} -l app={{ template "fullname" . }} -w
-
-{{- end }}
