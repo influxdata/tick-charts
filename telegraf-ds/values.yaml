@@ -17,7 +17,7 @@ resources:
     cpu: 1
     
 ## Exposed telegraf configuration
-## ref: https://docs.influxdata.com/telegraf/v1.5/administration/configuration/
+## ref: https://docs.influxdata.com/telegraf/v1.7/administration/configuration/
 config:
   # global_tags:
   #   cluster: "mycluster"
