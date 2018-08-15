@@ -67,6 +67,11 @@ config:
     enabled: true
     check_interval: 10m0s
     advance_period: 30m0s
+  admin:
+    enabled: false
+    bind_address: 8083
+    https_enabled: false
+    https_certificate: /etc/ss1/influxdb.pem
   monitor:
     store_enabled: true
     store_database: _internal
