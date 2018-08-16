@@ -27,10 +27,6 @@ spec:
         ports:
         - name: api
           containerPort: {{ .Values.config.http.bind_address }}
-        {{- if .Values.config.admin.enabled }}
-        - name: admin
-          containerPort: {{ .Values.config.admin.bind_address }}
-        {{- end }}
         {{- if .Values.config.graphite.enabled }}
         - name: graphite
           containerPort: {{ .Values.config.graphite.bind_address }}
