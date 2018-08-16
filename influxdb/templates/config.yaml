@@ -48,12 +48,6 @@ data:
       check-interval = "{{ .Values.config.shard_precreation.check_interval }}"
       advance-period = "{{ .Values.config.shard_precreation.advance_period }}"
 
-    [admin]
-      enabled = {{ .Values.config.admin.enabled }}
-      bind-address = ":{{ .Values.config.admin.bind_address }}"
-      https-enabled = {{ .Values.config.admin.https_enabled }}
-      https-certificate = "{{ .Values.config.admin.https_certificate }}"
-
     [monitor]
       store-enabled = {{ .Values.config.monitor.store_enabled }}
       store-database = "{{ .Values.config.monitor.store_database }}"
