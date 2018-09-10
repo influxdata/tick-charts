@@ -3,7 +3,7 @@
 ## ref: https://hub.docker.com/r/library/chronograf/tags/
 image:
   repository: "chronograf"
-  tag: "1.6.1-alpine"
+  tag: "1.6.2-alpine"
   pullPolicy: IfNotPresent
 
 ## Specify a service type
