@@ -5,6 +5,7 @@ metadata:
   name: {{ template "fullname" . }}
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: {{ .Release.Name }}
 spec:
   type: {{ .Values.service.type }}
   ports:
