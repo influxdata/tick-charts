@@ -58,3 +58,7 @@ $ helm repo add influx http://influx-charts.storage.googleapis.com
 $ helm install influx/telegraf-ds
 ```
 
+### Contributing
+
+If you are interested in contributing to this effort, we ask that you review and sign the [Contributor License Agreement](https://www.influxdata.com/legal/).  
+There is an individual and corporate level agreement.  Please review which is right based on your situation.

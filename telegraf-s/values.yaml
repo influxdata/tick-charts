@@ -3,7 +3,7 @@
 ## ref: https://hub.docker.com/r/library/telegraf/tags/
 image:
   repo: "telegraf"
-  tag: "1.6.3-alpine"
+  tag: "1.7.4-alpine"
   pullPolicy: IfNotPresent
 
 ## Configure resource requests and limits
@@ -26,7 +26,7 @@ service:
 
 ## Exposed telegraf configuration
 ## For full list of possible values see `/docs/all-config-values.yaml` and `/docs/all-config-values.toml`
-## ref: https://docs.influxdata.com/telegraf/v1.5/administration/configuration/
+## ref: https://docs.influxdata.com/telegraf/v1.7/administration/configuration/
 
 config:
 ##    global_tags:
@@ -47,10 +47,10 @@ config:
     hostname: "telegraf-polling-service"
     omit_hostname: false
   outputs:
-    influxdb:
-      urls:
-        - "http://data-influxdb.tick:8086"
-      database: "telegraf"
+    - influxdb:
+        urls:
+          - "http://data-influxdb.tick:8086"
+        database: "telegraf"
 ##        retention_policy: ""
 ##        write_consistency: "any"
 ##        timeout: "5s"
@@ -114,14 +114,15 @@ config:
 ##        server: "localhost:4150"
 ##        topic: "telegraf"
 ##        data_format: "influx"
-
+  
 # CPU and System is required for chronograf
 # This may show errors in the logs, but this does not affect performance or functionality
   inputs:
-##    cpu:
-##      percpu: false
-##      totalcpu: true
-##    system:
+
+##      cpu:
+##        percpu: false
+##        totalcpu: true
+##      system:
 ##      aerospike:
 ##        servers:
 ##          - "localhost:3000"
@@ -213,14 +214,18 @@ config:
 ##      haproxy:
 ##        servers:
 ##          - "http://myhaproxy.com:1936/haproxy?stats"
-    influxdb:
-      urls:
-        - "http://data-influxdb.tick:8086/debug/vars"
-      timeout: "5s"
-    kapacitor:
-      urls:
-        - "http://kap-kapacitor.tick:9092/debug/vars"
-      timeout: "5s"
+    - influxdb:
+        urls:
+          - "http://influxdb-influxdb.tick:8086/debug/vars"
+        timeout: "5s"
+    - kapacitor:
+        urls:
+          - "http://kap-kapacitor.tick:9092/debug/vars"
+        timeout: "5s"
+    - kapacitor:
+        urls:
+          - "http://kap2-kapacitor.tick:9092/debug/vars"
+        timeout: "5s"
 ##      lustre2:
 ##        ost_procfiles:
 ##          - "/proc/fs/lustre/obdfilter/*/stats"
@@ -314,12 +319,12 @@ config:
 ##        databases:
 ##          - "app_production"
 ##          - "testing"
-##     prometheus:
-##       urls:
-##         - "https://kubernetes.default:443/metrics"
-##       name_prefix: "prom_"
-##       bearer_token: "/var/run/secrets/kubernetes.io/serviceaccount/token"
-##       insecure_skip_verify: true
+##      prometheus:
+##        urls:
+##          - "https://kubernetes.default:443/metrics"
+##        name_prefix: "prom_"
+##        bearer_token: "/var/run/secrets/kubernetes.io/serviceaccount/token"
+##        insecure_skip_verify: true
 ##        ssl_ca: /path/to/cafile
 ##        ssl_cert: /path/to/certfile
 ##        ssl_key: /path/to/keyfile
@@ -364,12 +369,13 @@ config:
 ##        write_timeout: "10s"
 ##        max_body_size: 0
 ##        max_line_size: 0
-    statsd:
-      service_address: ":8125"
-      percentiles:
-        - 50
-        - 95
-        - 99
-      metric_separator: "_"
-      allowed_pending_messages: 10000
-      percentile_limit: 1000
+    - statsd:
+        service_address: ":8125"
+        percentiles:
+          - 50
+          - 95
+          - 99
+        metric_separator: "_"
+        allowed_pending_messages: 10000
+        percentile_limit: 1000
+
