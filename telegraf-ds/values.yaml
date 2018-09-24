@@ -30,24 +30,24 @@ config:
     flush_interval: "10s"
     flush_jitter: "0s"
   outputs:
-    influxdb:
-      url: "http://data-influxdb.tick:8086"
-      database: "telegraf"
-      retention_policy: ""
-      timeout: "5s"
-      username: ""
-      password: ""
-      user_agent: "telegraf"
-      insecure_skip_verify: false
+    - influxdb:
+        url: "http://data-influxdb.tick:8086"
+        database: "telegraf"
+        retention_policy: ""
+        timeout: "5s"
+        username: ""
+        password: ""
+        user_agent: "telegraf"
+        insecure_skip_verify: false
   inputs:
-    kubernetes:
-      url: "http://$HOSTIP:10255"
-      bearer_token: "/var/run/secrets/kubernetes.io/serviceaccount/token"
-      insecure_skip_verify: true
-    docker: 
-      endpoint: "unix:///var/run/docker.sock"
-      timeout: "5s"
-      perdevice: true
-      total: false
-      docker_label_exclude:
-        - "annotation.kubernetes.io/*"
+    - kubernetes:
+        url: "http://$HOSTIP:10255"
+        bearer_token: "/var/run/secrets/kubernetes.io/serviceaccount/token"
+        insecure_skip_verify: true
+    - docker: 
+        endpoint: "unix:///var/run/docker.sock"
+        timeout: "5s"
+        perdevice: true
+        total: false
+        docker_label_exclude:
+          - "annotation.kubernetes.io/*"
