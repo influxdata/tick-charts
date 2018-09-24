@@ -2,7 +2,7 @@
 ## ref: https://hub.docker.com/r/library/influxdb/tags/
 image:
   repo: "influxdb"
-  tag: "1.6.0-alpine"
+  tag: "1.6.2-alpine"
   pullPolicy: IfNotPresent
 
 ## Specify a service type
@@ -35,7 +35,7 @@ resources:
     
 ## Change InfluxDB configuration paramaters below:
 ## Defaults are indicated
-## ref: https://docs.influxdata.com/influxdb/v1.5/administration/config/
+## ref: https://docs.influxdata.com/influxdb/v1.6/administration/config/
 config:
   reporting_disabled: false
   bind_address: 8088
@@ -67,11 +67,6 @@ config:
     enabled: true
     check_interval: 10m0s
     advance_period: 30m0s
-  admin:
-    enabled: false
-    bind_address: 8083
-    https_enabled: false
-    https_certificate: /etc/ssl/influxdb.pem
   monitor:
     store_enabled: true
     store_database: _internal

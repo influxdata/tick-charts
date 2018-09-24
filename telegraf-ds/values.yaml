@@ -3,7 +3,7 @@
 ## ref: https://hub.docker.com/r/library/telegraf/tags/
 image:
   repo: "telegraf"
-  tag: "1.7.2-alpine"
+  tag: "1.7.4-alpine"
   pullPolicy: IfNotPresent
 
 ## Configure resource requests and limits
@@ -17,7 +17,7 @@ resources:
     cpu: 1
     
 ## Exposed telegraf configuration
-## ref: https://docs.influxdata.com/telegraf/v1.5/administration/configuration/
+## ref: https://docs.influxdata.com/telegraf/v1.7/administration/configuration/
 config:
   # global_tags:
   #   cluster: "mycluster"

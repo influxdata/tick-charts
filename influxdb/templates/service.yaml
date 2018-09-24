@@ -15,11 +15,6 @@ spec:
     port: {{ .Values.config.http.bind_address }}
     targetPort: {{ .Values.config.http.bind_address }}
   {{- end }}
-  {{- if .Values.config.admin.enabled }}
-  - name: admin
-    port: {{ .Values.config.admin.bind_address }}
-    targetPort: {{ .Values.config.admin.bind_address }}
-  {{- end }}
   {{- if .Values.config.graphite.enabled }}
   - name: graphite
     port: {{ .Values.config.graphite.bind_address }}
