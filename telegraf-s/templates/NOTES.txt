@@ -4,7 +4,7 @@ To open a shell session in the container running Telegraf run the following:
 
 To tail the logs for a Telegraf pod, run the following:
 
-- kubectl logs -f --namespace {{ .Release.Namespace }} $(kubectl get pods --namespace {{ .Release.Namespace }} -l app={{ template "fullname" . }}-ds -o jsonpath='{ .items[0].metadata.name }')
+- kubectl logs -f --namespace {{ .Release.Namespace }} $(kubectl get pods --namespace {{ .Release.Namespace }} -l app={{ template "fullname" . }} -o jsonpath='{ .items[0].metadata.name }')
 
 {{- if eq .Values.service.type "LoadBalancer" }}
 
