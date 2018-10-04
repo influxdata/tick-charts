@@ -81,7 +81,7 @@ We truncate at 24 chars because some Kubernetes name fields are limited to this 
           {{- end }}
           {{- if eq $tp "int" }}
       {{ $key }} = {{ $value | int64 }}
-          {{- end }}s
+          {{- end }}
           {{- if eq $tp "bool" }}
       {{ $key }} = {{ $value }}
           {{- end }}
