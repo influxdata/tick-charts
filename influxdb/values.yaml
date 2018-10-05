@@ -32,7 +32,22 @@ resources:
   limits:
     memory: 16Gi
     cpu: 8
-    
+
+## Node labels for pod assignment
+## ref: https://kubernetes.io/docs/user-guide/node-selection/
+#
+nodeSelector: {}
+
+## Tolerations for pod assignment
+## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+##
+tolerations: []
+
+## Affinity for pod assignment
+## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+##
+affinity: {}
+
 ## Change InfluxDB configuration paramaters below:
 ## Defaults are indicated
 ## ref: https://docs.influxdata.com/influxdb/v1.6/administration/config/

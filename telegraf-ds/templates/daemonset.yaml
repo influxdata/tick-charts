@@ -53,6 +53,10 @@ spec:
           mountPath: /var/run/docker.sock
         - name: config
           mountPath: /etc/telegraf
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}
       volumes:
       - name: sysro
         hostPath:
