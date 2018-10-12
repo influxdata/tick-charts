@@ -16,6 +16,21 @@ resources:
     memory: 2Gi
     cpu: 1
 
+## Node labels for pod assignment
+## ref: https://kubernetes.io/docs/user-guide/node-selection/
+#
+nodeSelector: {}
+
+## Tolerations for pod assignment
+## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+##
+tolerations: []
+
+## Affinity for pod assignment
+## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+##
+affinity: {}
+
 ## Configure the service for this telegraf instance. If you are running
 ## Any of the service plugins you will need this enabled
 ## Service Plugins: http_listener, statsd, tcp_listener, udp_listener
