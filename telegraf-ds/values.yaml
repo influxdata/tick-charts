@@ -46,7 +46,7 @@ config:
         insecure_skip_verify: false
   inputs:
     - kubernetes:
-        url: "http://$HOSTIP:10255"
+        url: "https://$HOSTIP:10250"
         bearer_token: "/var/run/secrets/kubernetes.io/serviceaccount/token"
         insecure_skip_verify: true
     - docker: 
