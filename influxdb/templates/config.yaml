@@ -77,6 +77,7 @@ data:
       realm = "{{ .Values.config.http.realm }}"
       unix-socket-enabled = {{ .Values.config.http.unix_socket_enabled }}
       bind-socket = "{{ .Values.config.http.bind_socket }}"
+      flux-enabled = {{ .Values.config.http.flux_enabled }}
     
     # TODO: allow multiple graphite listeners with templates
     
