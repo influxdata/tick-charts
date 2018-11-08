@@ -109,6 +109,7 @@ config:
     realm: InfluxDB
     unix_socket_enabled: false
     bind_socket: /var/run/influxdb.sock
+    flux_enabled: true
   graphite:
     enabled: false
     bind_address: 2003
