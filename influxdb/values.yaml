@@ -67,6 +67,8 @@ config:
     max_series_per_database: 1000000
     max_values_per_tag: 100000
     trace_logging_enabled: false
+    compact_throughput: 50331648
+    compact_throughput_burst: 50331648
   coordinator:
     write_timeout: 10s
     max_concurrent_queries: 0
