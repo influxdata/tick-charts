@@ -29,6 +29,8 @@ data:
       max-series-per-database = {{ .Values.config.data.max_series_per_database | int64 }}
       max-values-per-tag = {{ .Values.config.data.max_values_per_tag | int64 }}
       trace-logging-enabled = {{ .Values.config.data.trace_logging_enabled }}
+      compact-throughput = {{ .Values.config.data.compact_throughput | int64 }}
+      compact-throughput-burst = {{ .Values.config.data.compact_throughput_burst | int64 }}
 
     [coordinator]
       write-timeout = "{{ .Values.config.coordinator.write_timeout }}"
