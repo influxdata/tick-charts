@@ -2,7 +2,7 @@
 ## ref: https://hub.docker.com/r/library/influxdb/tags/
 image:
   repo: "influxdb"
-  tag: "1.6.3-alpine"
+  tag: "1.7.0-alpine"
   pullPolicy: IfNotPresent
 
 ## Specify a service type
@@ -50,7 +50,7 @@ affinity: {}
 
 ## Change InfluxDB configuration paramaters below:
 ## Defaults are indicated
-## ref: https://docs.influxdata.com/influxdb/v1.6/administration/config/
+## ref: https://docs.influxdata.com/influxdb/latest/administration/config/
 config:
   reporting_disabled: false
   bind_address: 8088
