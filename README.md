@@ -1,12 +1,17 @@
-# `tick-charts`
+# InfluxDB (TICK stack) for Amazon EKS 
 
-This is a collection of [Helm](https://github.com/kubernetes/helm) [Charts](https://github.com/kubernetes/charts) for the [InfluxData](https://influxdata.com/time-series-platform) TICK stack. This repo contains the following charts:
+Deploy the [InfluxData](https://influxdata.com/time-series-platform) TICK stack using this collection of [Charts](https://github.com/kubernetes/charts) for [Helm](https://github.com/kubernetes/helm), the Kubernetes package manager. This repo contains the following charts:
 
-- [influxdb](/influxdb/README.md)
-- [chronograf](/chronograf/README.md)
-- [kapacitor](/kapacitor/README.md)
-- [telegraf-s](/telegraf-s/README.md)
-- [telegraf-ds](/telegraf-ds/README.md)
+- [influxdb](/influxdb/README.md) for InfluxDB
+- [chronograf](/chronograf/README.md) for Chronograf
+- [kapacitor](/kapacitor/README.md) for Kapacitor
+- [telegraf-s](/telegraf-s/README.md) for Telegraf as a [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
+- [telegraf-ds](/telegraf-ds/README.md) for Telegraf as a [DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)
+
+## Requirements
+
+- [An Amazon EKS cluster](https://aws.amazon.com/eks/)
+- [`kubectl`](https://kubernetes.io/docs/tasks/tools/install-kubectl/) with the context set to an Amazon EKS cluster
 
 ### Deploy the whole stack!
 
