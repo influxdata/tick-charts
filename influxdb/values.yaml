@@ -53,8 +53,10 @@ affinity: {}
 ## ref: https://docs.influxdata.com/influxdb/v1.7/administration/config/
 config:
   reporting_disabled: false
-  bind_address: 8088
   storage_directory: /var/lib/influxdb
+  rpc:
+    bind_address: 8088
+    enabled: true
   meta:
     retention_autocreate: true
     logging_enabled: true
@@ -162,3 +164,4 @@ config:
     log_enabled: true
     enabled: true
     run_interval: 1s
+
