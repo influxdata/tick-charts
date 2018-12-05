@@ -10,26 +10,7 @@ metadata:
     heritage: "{{ .Release.Service }}"
 data:
   telegraf.conf: |+
-    {{- if .Values.config.global_tags }}
-    [global_tags]
-      {{- range $key, $val := .Values.config.global_tags }}
-      {{ $key }} = {{ $val | quote }}
-      {{- end }}
-    {{- end }}
-    [agent]
-      interval = {{ .Values.config.agent.interval | quote }}
-      round_interval = {{ .Values.config.agent.round_interval }}
-      metric_batch_size = {{ .Values.config.agent.metric_batch_size }}
-      metric_buffer_limit = {{ .Values.config.agent.metric_buffer_limit }}
-      collection_jitter = {{ .Values.config.agent.collection_jitter | quote }}
-      flush_interval = {{ .Values.config.agent.flush_interval | quote }}
-      flush_jitter = {{ .Values.config.agent.flush_jitter | quote }}
-      precision = ""
-      debug = false
-      quiet = true
-      logfile = ""
-      hostname = "$HOSTNAME"
-      omit_hostname = false
-
+    {{ template "global_tags" .Values.config.global_tags }}
+    {{ template "agent" .Values.config.agent }}
     {{ template "outputs" .Values.config.outputs }}
     {{ template "inputs" .Values.config.inputs -}}
