@@ -2,8 +2,8 @@
 ## 
 ## ref: https://hub.docker.com/r/library/chronograf/tags/
 image:
-  repository: "chronograf"
-  tag: "1.7-alpine"
+  repository: "quay.io/influxdb/chronograf"
+  tag: "1.7.5"
   pullPolicy: IfNotPresent
 
 ## Specify a service type
