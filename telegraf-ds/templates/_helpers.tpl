@@ -21,6 +21,34 @@ We truncate at 24 chars because some Kubernetes name fields are limited to this 
   - agent section
 */}}
 
+{{- define "global_tags" -}}
+{{- if . -}}
+[global_tags]
+  {{- range $key, $val := . }}
+      {{ $key }} = {{ $val | quote }}
+  {{- end }}
+{{- end }}
+{{- end -}}
+
+{{- define "agent" -}}
+[agent]
+{{- range $key, $value := . -}}
+  {{- $tp := typeOf $value }}
+  {{- if eq $tp "string"}}
+      {{ $key }} = {{ $value | quote }}
+  {{- end }}
+  {{- if eq $tp "float64"}}
+      {{ $key }} = {{ $value | int64 }}
+  {{- end }}
+  {{- if eq $tp "int"}}
+      {{ $key }} = {{ $value | int64 }}
+  {{- end }}
+  {{- if eq $tp "bool"}}
+      {{ $key }} = {{ $value }}
+  {{- end }}
+{{- end }}
+{{- end -}}
+
 {{- define "outputs" -}}
 {{- range $outputIdx, $configObject := . -}}
 {{- range $output, $config := . }}
