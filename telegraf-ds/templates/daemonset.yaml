@@ -16,6 +16,7 @@ spec:
         # This means that if the configmap changes, the deployment will be rolled
         checksum/config: {{ include (print .Template.BasePath "/configmap.yaml") . | sha256sum }}
     spec:
+      serviceAccountName: {{ template "fullname" . }}
       containers:
       - name: {{ template "fullname" . }}
         image: "{{ .Values.image.repo }}:{{ .Values.image.tag }}"
