@@ -28,11 +28,11 @@ function usage
         -a action: Valid options are create and destroy
         -s services: The name of the component. Valid options are influxdb, kapacitor, telegraf-s, telegraf-ds, chronograf or all
     Examples:
-        ./create.sh -s influxdb -a create -c aws-eks
-        ./create.sh -s influxdb -a destroy -c aws-eks
+        ./create.sh -s influxdb -a create -p aws-eks
+        ./create.sh -s influxdb -a destroy -p aws-eks
 
-        ./create.sh -s all -a create -c aws-eks
-        ./create.sh -s all -a delete -c aws-eks
+        ./create.sh -s all -a create -p aws-eks
+        ./create.sh -s all -a delete -p aws-eks
 EOF
 }
 
@@ -41,11 +41,11 @@ function initScript
 	PROVIDER=""
 	ACTION="create"
 	SERVICES=""
-	while getopts h:a:c:s: opt
+	while getopts h:a:p:s: opt
 		do
 			case "$opt" in
 				h) usage "";exit 1;;
-				c) PROVIDER=$OPTARG;;
+				p) PROVIDER=$OPTARG;;
 				a) ACTION=$OPTARG;;
 				s) SERVICES+=($OPTARG);;
 				\?) usage "";exit 1;;

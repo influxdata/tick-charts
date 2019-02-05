@@ -80,10 +80,6 @@ function create_chart
 
 	elif [[ "$service" == 'kapacitor' ]]; then
 
-		echo "Deploying Kapacitor ....."
-		#INFLUX_URL=`(kubectl describe svc data-influxdb | grep "Ingress" | awk '{print $3}')`
-	 	#sed -i "/influxURL: /c influxURL: http://$INFLUX_URL:8086" kapacitor/values.yaml
-
 	 	# replace ClusterIP to LoadBalancer
 		sed -i "s/\(type:\s\)\(.*\)/\1LoadBalancer/" "$root_dir/$service/values.yaml"
 
@@ -113,24 +109,10 @@ function create_chart
 
 	elif [[ "$service" == 'telegraf-s' ]]; then
 
-		#influxURL=`cat telegraf-s/values.yaml | grep -A3 -m 1 "\- influxdb:" | grep "http" | sed -e 's/.*\/\/\(.*\)".*/\1/'`
-        #kapacitor=`cat telegraf-s/values.yaml | grep -A3 -m 1 "\- kapacitor:" | grep "http" | sed -e 's/.*\/\/\(.*\)".*/\1/'`
-		#INFLUX_URL=`(kubectl describe svc data-influxdb | grep "Ingress" | awk '{print $3}')`
-		#KAPACITOR_URL=`(kubectl describe svc alerts-kapacitor | grep "Ingress" | awk '{print $3}')`
-		#sed -i "s/$influxURL/$INFLUX_URL:8086/g" telegraf-s/values.yaml
-		#sed -i "s/$kapacitor/$KAPACITOR_URL:9092/g" telegraf-s/values.yaml
-
-		# replace ClusterIP to LoadBalancer
-		# sed -i "s/\(type:\s\)\(.*\)/\1LoadBalancer/" $root_dir/$service/values.yaml
-
 		# Deploying telegraf-ds service
 		deploy_service polling "$root_dir/$service"
 
 	elif [[ "$service" == 'telegraf-ds' ]]; then
-
-		#telInfluxUrl=`cat telegraf-ds/values.yaml | grep -A3 -m 1 "\- influxdb:" | grep "http" | sed -e 's/.*\/\/\(.*\)".*/\1/'`
-		#INFLUX_URL=`(kubectl describe svc data-influxdb | grep "Ingress" | awk '{print $3}')`
-		#sed -i "s/$telInfluxUrl/$INFLUX_URL:8086/g" telegraf-ds/values.yaml
 
 		# Deploying telegraf-ds service
 		deploy_service hosts "$root_dir/$service"
