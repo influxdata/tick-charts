@@ -25,14 +25,15 @@ function usage
 
     Usage:
         -p provider: Valid option is aws-eks
-        -a action: Valid options are create and destroy
+        -a action: Valid options are create, destroy, prune_resources
         -s services: The name of the component. Valid options are influxdb, kapacitor, telegraf-s, telegraf-ds, chronograf or all
     Examples:
-        ./create.sh -s influxdb -a create -p aws-eks
-        ./create.sh -s influxdb -a destroy -p aws-eks
+        ./run.sh -s influxdb -a create -p aws-eks
+        ./run.sh -s influxdb -a destroy -p aws-eks
+        ./run.sh -a prune_resources -p aws-eks
 
-        ./create.sh -s all -a create -p aws-eks
-        ./create.sh -s all -a delete -p aws-eks
+        ./run.sh -s all -a create -p aws-eks
+        ./run.sh -s all -a delete -p aws-eks
 EOF
 }
 

@@ -47,25 +47,26 @@ to your account may be incurred.
  - kubectl tool in path with working configuration
 
 ##### Usage:
-just run `./create.sh` and let the shell script do it for you! 
+just run `./run.sh` and let the shell script do it for you! 
 
-- ./create.sh -s $services -a $action -p $provider
+- ./run.sh -s $services -a $action -p $provider
   - Options:   
     -s services:  The name of the component. 
     Valid options are `influxdb`, `kapacitor`, `telegraf-s`, `telegraf-ds`, `chronograf` and `all`   
-    -a action: Valid options are `create` and `destroy`   
+    -a action: Valid options are `create`, `destroy` and `prune_resources`   
     -p provider: Valid options is `aws-eks`
     
 ##### Examples:
  - To execute all components from `single command`:
 
-    	./create.sh -s all -a create -p aws-eks
-    	./create.sh -s all -a destroy -p aws-eks
+    	./run.sh -s all -a create -p aws-eks
+    	./run.sh -s all -a destroy -p aws-eks
+    	./run.sh -a prune_resources -p aws-eks
         
  - To execute `individual command`:
  
-        ./create.sh -s influxdb -s kapacitor -s ... -a create -p aws-eks
-        ./create.sh -s influxdb -s kapacitor -s ... -a destroy -p aws-eks
+        ./run.sh -s influxdb -s kapacitor -s ... -a create -p aws-eks
+        ./run.sh -s influxdb -s kapacitor -s ... -a destroy -p aws-eks
       
 ### Usage
 

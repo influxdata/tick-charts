@@ -231,15 +231,11 @@ config:
 ##          - "http://myhaproxy.com:1936/haproxy?stats"
     - influxdb:
         urls:
-          - "http://influxdb-influxdb.tick:8086/debug/vars"
+          - "http://data-influxdb.tick:8086/debug/vars"
         timeout: "5s"
     - kapacitor:
         urls:
-          - "http://kap-kapacitor.tick:9092/debug/vars"
-        timeout: "5s"
-    - kapacitor:
-        urls:
-          - "http://kap2-kapacitor.tick:9092/debug/vars"
+          - "http://alerts-kapacitor.tick:9092/debug/vars"
         timeout: "5s"
 ##      lustre2:
 ##        ost_procfiles:

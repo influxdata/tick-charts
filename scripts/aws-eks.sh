@@ -38,6 +38,7 @@ function main
 
     elif [[ "$action" == 'prune_resources' ]]; then
 
+        helm reset --kube-context $(kubectl config current-context)
         kubectl delete -f "$dir"/resources/eks-default.yaml
         kubectl delete namespaces tick
         kubectl config set-context $(kubectl config current-context) --namespace=kube-system
