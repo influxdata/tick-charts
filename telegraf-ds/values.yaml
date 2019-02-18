@@ -3,7 +3,7 @@
 ## ref: https://hub.docker.com/r/library/telegraf/tags/
 image:
   repo: "telegraf"
-  tag: "1.9.1-alpine"
+  tag: "1.9.4-alpine"
   pullPolicy: IfNotPresent
 
 ## Configure resource requests and limits
@@ -62,3 +62,21 @@ config:
         total: false
         docker_label_exclude:
           - "annotation.kubernetes.io/*"
+    - cpu:
+        percpu: false
+        totalcpu: true
+    - disk:
+        - ignore_fs:
+            - tmpfs
+            - devtmpfs
+            - devfs
+            - overlay
+            - aufs
+            - squashfs
+    - diskio:
+    - kernel:
+    - mem:
+    - processes:
+    - swap:
+    - system:
+    - net:
