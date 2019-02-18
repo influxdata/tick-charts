@@ -66,6 +66,7 @@ config:
         urls:
           - "http://data-influxdb.tick:8086"
         database: "telegraf"
+#        skip_database_creation: false
 #        retention_policy: ""
 #        write_consistency: "any"
         timeout: "5s"
@@ -73,65 +74,88 @@ config:
 #        password: "metricsmetricsmetricsmetrics"
         user_agent: "telegraf"
 #        udp_payload: 512
-#        ssl_ca: "/etc/telegraf/ca.pem"
-#        ssl_cert: "/etc/telegraf/cert.pem"
-#        ssl_key: "/etc/telegraf/key.pem"
+#        tls_ca: "/etc/telegraf/ca.pem"
+#        tls_cert: "/etc/telegraf/cert.pem"
+#        tls_key: "/etc/telegraf/key.pem"
         insecure_skip_verify: false
-#      amqp:
-#        url: "amqp://localhost:5672/influxdb"
-#        exchange: "telegraf"
+#    - amqp:
 #        auth_method: "PLAIN"
-#        routing_tag: "host"
-#        retention_policy: "default"
-#        database: "telegraf"
-#        precision: "s"
-#        ssl_ca: "/etc/telegraf/ca.pem"
-#        ssl_cert: "/etc/telegraf/cert.pem"
-#        ssl_key: "/etc/telegraf/key.pem"
-#        insecure_skip_verify: false
-#        data_format: "influx"
-#      kafka:
 #        brokers:
-#          - "localhost:9092"
-#        topic: "telegraf"
-#        routing_tag: "host"
-#        compression_codec: 0
-#        required_acks: -1
-#        max_retry: 3
-#        ssl_ca: "/etc/telegraf/ca.pem"
-#        ssl_cert: "/etc/telegraf/cert.pem"
-#        ssl_key: "/etc/telegraf/key.pem"
-#        insecure_skip_verify: false
+#         - "amqp://localhost:5672/influxdb"
 #        data_format: "influx"
-#      mqtt:
+#        database: "telegraf"
+#        delivery_mode: "transient"
+#        exchange: "telegraf"
+#        exchange_arguments:
+#          hash_propery: "timestamp"
+#        exchange_declare_passive: false
+#        exchange_durability: "durable"
+#        exchange_type: "topic"
+#        headers:
+#          database: "telegraf"
+#          retention_policy: "default"
+#        insecure_skip_verify: false
+#        max_messages: 0
+#        password: '""
+#        retention_policy: "default"
+#        routing_key: "telegraf"
+#        routing_tag: "host"
+#        timeout: "5s"
+#        tls_ca: "/etc/telegraf/ca.pem"
+#        tls_cert: "/etc/telegraf/cert.pem"
+#        tls_key: "/etc/telegraf/key.pem"
+#        use_batch_format: false
+#        username: ""
+#    - kafka:
+#        brokers:
+#         - "localhost:9092"
+#        client_id: "Telegraf"
+#        compression_codec: 0
+#        data_format: "influx"
+#        insecure_skip_verify: false
+#        max_message_bytes: 1000000
+#        max_retry: 3
+#        required_acks: -1
+#        routing_key: ""
+#        routing_tag: "host"
+#        sasl_password: "secret"
+#        sasl_username: "kafka"
+#        tls_ca: "/etc/telegraf/ca.pem"
+#        tls_cert: "/etc/telegraf/cert.pem"
+#        tls_key: "/etc/telegraf/key.pem"
+#        topic: "telegraf"
+#        version: ""
+#    - mqtt:
 #        servers:
 #          - "localhost:1883"
 #        topic_prefix: "telegraf"
+#        qos: 2
 #        username: "telegraf"
 #        password: "metricsmetricsmetricsmetrics"
-#        ssl_ca: "/etc/telegraf/ca.pem"
-#        ssl_cert: "/etc/telegraf/cert.pem"
-#        ssl_key: "/etc/telegraf/key.pem"
+#        client_id: ""
+#        timeout: "5s"
+#        tls_ca: "/etc/telegraf/ca.pem"
+#        tls_cert: "/etc/telegraf/cert.pem"
+#        tls_key: "/etc/telegraf/key.pem"
 #        insecure_skip_verify: false
+#        batch: false
 #        data_format: "influx"
-#      nats:
+#    - nats:
 #        servers:
 #          - "nats://localhost:4222"
 #        username: ""
 #        password: ""
 #        subject: "telegraf"
-#        ssl_ca: "/etc/telegraf/ca.pem"
-#        ssl_cert: "/etc/telegraf/cert.pem"
-#        ssl_key: "/etc/telegraf/key.pem"
+#        tls_ca: "/etc/telegraf/ca.pem"
+#        tls_cert: "/etc/telegraf/cert.pem"
+#        tls_key: "/etc/telegraf/key.pem"
 #        insecure_skip_verify: false
 #        data_format: "influx"
-#      nsq:
+#    - nsq:
 #        server: "localhost:4150"
 #        topic: "telegraf"
 #        data_format: "influx"
 
-## CPU and System is required for chronograf
-## This may show errors in the logs, but this does not affect performance or functionality
   inputs:
 
 #    - aerospike:
@@ -236,9 +260,9 @@ config:
 #          - "jvm.memory.pools.Metaspace.committed"
 #        username: ""
 #        password: ""
-#        ssl_ca: "/etc/telegraf/ca.pem"
-#        ssl_cert: "/etc/telegraf/cert.pem"
-#        ssl_key: "/etc/telegraf/key.pem"
+#        tls_ca: "/etc/telegraf/ca.pem"
+#        tls_cert: "/etc/telegraf/cert.pem"
+#        tls_key: "/etc/telegraf/key.pem"
 #        insecure_skip_verify: false
 #    - haproxy:
 #        insecure_skip_verify: false
@@ -370,13 +394,23 @@ config:
 #        name: "rmq-server-1"
 #        username: "guest"
 #        password: "guest"
-#        ssl_ca: "/etc/telegraf/ca.pem"
-#        ssl_cert: "/etc/telegraf/cert.pem"
-#        ssl_key: "/etc/telegraf/key.pem"
+#        tls_ca: "/etc/telegraf/ca.pem"
+#        tls_cert: "/etc/telegraf/cert.pem"
+#        tls_key: "/etc/telegraf/key.pem"
 #        insecure_skip_verify: false
+#        header_timeout: "3s"
+#        client_timeout: "4s"
 #        nodes:
 #          - "rabbit@node1"
 #          - "rabbit@node2"
+#        queues:
+#          - "telegraf"
+#       exchanges:
+#          - "telegraf"
+#       queue_name_include:
+#          -
+#       queue_name_exclude:
+#          -
 #    - raindrops:
 #        urls:
 #          - "http://localhost:8080/_raindrops"
