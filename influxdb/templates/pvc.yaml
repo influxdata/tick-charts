@@ -15,6 +15,7 @@ metadata:
     volume.alpha.kubernetes.io/storage-class: default
   {{- end }}
 spec:
+  volumeName: influx-pv
   accessModes:
     - {{ .Values.persistence.accessMode | quote }}
   resources:
