@@ -62,3 +62,21 @@ config:
         total: false
         docker_label_exclude:
           - "annotation.kubernetes.io/*"
+    - cpu:
+        percpu: false
+        totalcpu: true
+    - disk:
+        - ignore_fs:
+            - tmpfs
+            - devtmpfs
+            - devfs
+            - overlay
+            - aufs
+            - squashfs
+    - diskio:
+    - kernel:
+    - mem:
+    - processes:
+    - swap:
+    - system:
+    - net:

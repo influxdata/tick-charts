@@ -49,54 +49,59 @@ function main
 function create_chart
 {
 	service="$1"
-	influxPort=8086
-	kapacitorPort=9092
-		
+    MINIKUBE_IP=$(minikube ip)
+
     echo "Creating chart for" "$service"
 	if [[ "$service" == 'influxdb' ]]; then
 
 		# Deploying influxdb service
-		echo "Deploying influxdb ....."
+		echo "Deploying $service ....."
 
-		# replace ClusterIP to LoadBalancer
-		sed -i "s/\(type:\s\)\(.*\)/\1LoadBalancer/" "$root_dir/$service/values.yaml"
+		# replace ClusterIP to NodePort
+		sed -i "s/\(type:\s\)\(.*\)/\1NodePort/" "$root_dir/$service/values.yaml"
 
 		deploy_service data "$root_dir/$service"
 		sleep 120;
+		INFLUX_PORT+=($(kubectl describe svc data-influxdb | grep "NodePort:" | awk '{print $3}' | tr -d /TCP))
 
-		INFLUX_URL=$(kubectl describe svc data-influxdb | grep "Ingress" | awk '{print $3}')
-
-		printf "\n\n=======================================================================\n"
-		echo "Influxdb Endpoint URL:" $INFLUX_URL:$influxPort
-		printf "\n\n=======================================================================\n"
+        printf "\n\n=======================================================================\n"
+        for port in ${INFLUX_PORT[@]}; do
+            echo "Influxdb Endpoint URL:" $MINIKUBE_IP:$port
+        done
+        printf "\n\n=======================================================================\n"
 
 	elif [[ "$service" == 'kapacitor' ]]; then
 
-	 	# replace ClusterIP to LoadBalancer
-		sed -i "s/\(type:\s\)\(.*\)/\1LoadBalancer/" "$root_dir/$service/values.yaml"
-
 		# Deploying kapacitor service
+        echo "Deploying $service ....."
+
+        # replace ClusterIP to NodePort
+		sed -i "s/\(type:\s\)\(.*\)/\1NodePort/" "$root_dir/$service/values.yaml"
+
 		deploy_service alerts "$root_dir/$service"
 		sleep 120;
-		KAPACITOR_URL=`(kubectl describe svc alerts-kapacitor | grep "Ingress" | awk '{print $3}')`
+		KAPACITOR_PORT=$(kubectl describe svc alerts-kapacitor | grep "NodePort:" | awk '{print $3}' | tr -d /TCP)
+
 		printf "\n\n=======================================================================\n"
-		echo "Kapacitor Endpoint URL:" $KAPACITOR_URL:$kapacitorPort
+		echo "Kapacitor Endpoint URL:" $MINIKUBE_IP:$KAPACITOR_PORT
 		printf "\n\n=======================================================================\n"
 
 
 	elif [[ "$service" == 'chronograf' ]]; then
 
+		# Deploying chronograf service
 		echo "Deploying Chronograf ....."
 
-		# replace ClusterIP to LoadBalancer
-		sed -i "s/\(type:\s\)\(.*\)/\1LoadBalancer/" "$root_dir/$service/values.yaml"
+		# replace ClusterIP to NodePort
+		sed -i "s/\(type:\s\)\(.*\)/\1NodePort/" "$root_dir/$service/values.yaml"
 
 		deploy_service dash "$root_dir/$service"
 		sleep 120;
-		# Deploying chronograf service
-		CHRONOGRAF_URL=`(kubectl describe svc dash-chronograf | grep "Ingress" | awk '{print $3}')`
+
+		CHRONOGRAF_PORT=$(kubectl describe svc dash-chronograf | grep "NodePort:" | awk '{print $3}' | tr -d /TCP)
+
 		printf "\n\n=======================================================================\n"
-		echo "Chronograf Endpoint URL:" $CHRONOGRAF_URL
+		echo "Chronograf Endpoint URL:" $MINIKUBE_IP:$CHRONOGRAF_PORT
 		printf "\n=======================================================================\n"
 
 	elif [[ "$service" == 'telegraf-s' ]]; then
@@ -125,7 +130,7 @@ function destroy_chart
 	if [ "$service" == "influxdb" ]; then
 		helm delete data --purge
 	elif [ $service == "kapacitor" ]; then
-		helm delete alerts --purge	
+		helm delete alerts --purge
 	elif [ $service == "chronograf" ]; then
 		helm delete dash --purge
 	elif [ $service == "telegraf-s" ]; then
@@ -138,6 +143,6 @@ function destroy_chart
 
 function initScript
 {
-	echo "Tick Charts for EKS"	
+	echo "Tick Charts for Minikube"
 }
 main "$@"
