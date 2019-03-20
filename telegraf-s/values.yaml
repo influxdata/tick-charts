@@ -59,7 +59,7 @@ config:
     debug: false
     quiet: false
     logfile: ""
-    hostname: "telegraf-polling-service"
+    hostname: "$HOSTNAME"
     omit_hostname: false
   outputs:
     - influxdb:

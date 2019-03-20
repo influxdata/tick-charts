@@ -61,7 +61,7 @@ to your account may be incurred.
 #### Execution
 just run `./run.sh` and let the shell script do it for you! 
 
-- ./run.sh -s $services -a $action -p $provider
+`./run.sh -s $services -a $action -p $provider`
   - Options:   
     -s services:  The name of the component. 
     Valid options are `influxdb`, `kapacitor`, `telegraf-s`, `telegraf-ds`, `chronograf` and `all`. Default is `all`   
@@ -71,7 +71,7 @@ just run `./run.sh` and let the shell script do it for you!
 ##### Examples:
  - To execute all components from `single command`:
         
-        ./run.sh (it will be run with: -s all -a create -p minikube)
+        ./run.sh (by default it runs with: -s all -a create -p minikube)
     	./run.sh -s all -a create -p aws-eks
     	./run.sh -s all -a destroy -p aws-eks
     	./run.sh -a prune_resources -p aws-eks
