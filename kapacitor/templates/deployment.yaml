@@ -32,6 +32,9 @@ spec:
           mountPath: /var/lib/kapacitor
         - name: config
           mountPath: /etc/kapacitor/
+      {{- if .Values.priorityClassName }}
+      priorityClassName: {{ .Values.priorityClassName }}
+      {{- end }}
     {{- with .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}
