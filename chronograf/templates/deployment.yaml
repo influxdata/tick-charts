@@ -110,6 +110,9 @@ spec:
         - name: data
           mountPath: /var/lib/chronograf
         resources:
+      {{- if .Values.priorityClassName }}
+      priorityClassName: {{ .Values.priorityClassName }}
+      {{- end }}
 {{ toYaml .Values.resources | indent 10 }}
     {{- with .Values.nodeSelector }}
       nodeSelector:
