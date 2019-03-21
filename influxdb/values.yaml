@@ -16,6 +16,9 @@ service:
 ##
 persistence:
   enabled: false
+  ## If defined, existing pvc will be used instead of creating a new one
+  ## accessMode and size parameters will be ignored when using an existing claim
+  # existingClaim: 
   ## If defined, volume.beta.kubernetes.io/storage-class: <storageClass>
   ## Default: volume.alpha.kubernetes.io/storage-class: default
   ##
