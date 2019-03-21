@@ -6,17 +6,17 @@
 function usage {
 	cat <<EOF
 
-    Usage:
-        -p provider: Valid options are minikube, aws-eks
-        -a action: Valid options are create, destroy, prune_resources
-        -s services: The name of the component. Valid options are influxdb, kapacitor, telegraf-s, telegraf-ds, chronograf or all
+    Usage: run.sh [-a ACTION] [-s SERVICE] [-p PROVIDER]
+        -p PROVIDER: Valid options are minikube, aws-eks
+        -a ACTION: Valid options are create, destroy, prune_resources
+        -s SERVICE: The name of the component. Valid options are influxdb, kapacitor, telegraf-s, telegraf-ds, chronograf or all
     Examples:
-        ./run.sh [-a create -s all -p minikube]
-        ./run.sh -s influxdb -a create [-p minikube]
-        ./run.sh -s influxdb -a destroy [-p minikube]
-        ./run.sh -a prune_resources [-p minikube]
-        ./run.sh -s all -a create -p aws-eks
-        ./run.sh -s all -a destroy -p aws-eks
+        ./run.sh                                Run with defaults (-a create -s all -p minikube)
+        ./run.sh -s influxdb -a create          Deploy InfluxDB helm chart do default k9s provider (minikube)
+        ./run.sh -s influxdb -a destroy         Remove InfluxDB deployment from default k8s provider (minikube)
+        ./run.sh -a prune_resources             Remove all metadata resources from default k8s provider (minikube)
+        ./run.sh -s all -a create -p aws-eks    Deploy all components to AWS EKS
+        ./run.sh -s all -a destroy -p aws-eks   Remove all components from AWS EKS
 EOF
 }
 
@@ -50,6 +50,7 @@ function main {
 
 	echo "Services:" ${SERVICES[@]}
 	echo "Action:" ${ACTION}
+	echo "Provider:" ${PROVIDER}
 
     case ${PROVIDER} in
         minikube)
@@ -98,30 +99,30 @@ function main {
 }
 
 function print_service_url {
-        local service=$1
-        local service_alias=$2
-        local service_ports=()
-        local service_ip=""
-        local service_urls=()
+    local service=$1
+    local service_alias=$2
+    local service_ports=()
+    local service_ip=""
+    local service_urls=()
 
-        case ${PROVIDER} in
-            minikube)
-                service_ports+=($(kubectl describe svc ${service_alias}-${service} | grep "NodePort:" | awk '{print $3}' | tr -d /TCP))
-                service_ip=$(sudo minikube ip)
-                for port in ${service_ports[@]}; do
-                    service_urls+=("${service_ip}:${port}")
-                done
-                ;;
-            aws-eks)
-                service_urls+=($(kubectl describe svc ${service_alias}-${service} | grep "Ingress" | awk '{print $3}'))
-                ;;
-        esac
+    case ${PROVIDER} in
+        minikube)
+            service_ports+=($(kubectl describe svc ${service_alias}-${service} | grep "NodePort:" | awk '{print $3}' | tr -d /TCP))
+            service_ip=$(minikube ip)
+            for port in ${service_ports[@]}; do
+                service_urls+=("${service_ip}:${port}")
+            done
+            ;;
+        aws-eks)
+            service_urls+=($(kubectl describe svc ${service_alias}-${service} | grep "Ingress" | awk '{print $3}'))
+            ;;
+    esac
 
-        printf "\n\n=======================================================================\n"
-        for url in ${service_urls[@]}; do
-            echo "${service} Endpoint URL:" ${url}
-        done
-        printf "=======================================================================\n\n"
+    printf "\n\n=======================================================================\n"
+    for url in ${service_urls[@]}; do
+        echo "${service} Endpoint URL:" ${url}
+    done
+    printf "=======================================================================\n\n"
 }
 
 function replace_service_type {
