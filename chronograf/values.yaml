@@ -3,7 +3,7 @@
 ## ref: https://hub.docker.com/r/library/chronograf/tags/
 image:
   repository: "chronograf"
-  tag: "1.7.5-alpine"
+  tag: "1.7.7-alpine"
   pullPolicy: IfNotPresent
 
 ## Specify a service type
@@ -35,6 +35,10 @@ resources:
   limits:
     memory: 2Gi
     cpu: 2
+
+## Pod priority
+## https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/
+# priorityClassName: ""
 
 ## Node labels for pod assignment
 ## ref: https://kubernetes.io/docs/user-guide/node-selection/
