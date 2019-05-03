@@ -21,6 +21,19 @@ spec:
       - name: {{ template "fullname" . }}
         image: "{{ .Values.image.repo }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ default "" .Values.image.pullPolicy | quote }}
+        env:
+        # This pulls HOSTNAME from the node, not the pod.
+        - name: HOSTNAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        # In test clusters where hostnames are resolved in /etc/hosts on each node,
+        # the HOSTNAME is not resolvable from inside containers
+        # So inject the host IP as well
+        - name: HOSTIP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
         resources:
 {{ toYaml .Values.resources | indent 10 }}
         volumeMounts:
