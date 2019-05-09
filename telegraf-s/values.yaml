@@ -17,7 +17,7 @@ resources:
     cpu: 1
 
 # Pod service account
-#serviceAccountName: ""
+# serviceAccountName: ""
 
 ## Pod priority
 ## https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/
