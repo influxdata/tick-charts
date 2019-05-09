@@ -44,6 +44,9 @@ spec:
       tolerations:
 {{ toYaml . | indent 8 }}
     {{- end }}
+      {{- if .Values.serviceAccountName }}
+      serviceAccountName: {{ .Values.serviceAccountName }}
+      {{- end }}
       volumes:
       - name: varrunutmpro
         hostPath:
