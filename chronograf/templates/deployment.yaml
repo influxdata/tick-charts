@@ -97,15 +97,15 @@ spec:
 {{- end }}
         ports:
         - containerPort: 8888
-          name: api
+          name: http-api
         livenessProbe:
           httpGet:
             path: /ping
-            port: api
+            port: http-api
         readinessProbe:
           httpGet:
             path: /ping
-            port: api
+            port: http-api
         volumeMounts:
         - name: data
           mountPath: /var/lib/chronograf
