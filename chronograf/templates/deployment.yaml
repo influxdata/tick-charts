@@ -17,7 +17,9 @@ spec:
         # Include a hash of the secret in the pod template
         # This means that if the secret changes, the deployment will be rolled
         checksum/secret: {{ include (print .Template.BasePath "/secret.yaml") . | sha256sum }}
-{{ toYaml .Values.podAnnotations | indent 8 }}
+        {{- range $key, $value := .Values.podAnnotations }}
+        {{ $key }}: {{ $value | quote }}
+        {{- end }}
     spec:
       containers:
       - name: {{ .Chart.Name }}

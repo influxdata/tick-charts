@@ -17,7 +17,9 @@ spec:
         # Include a hash of the config in the pod template
         # This means that if the config changes, the deployment will be rolled
         checksum/config: {{ include (print .Template.BasePath "/config.yaml") . | sha256sum }}
-{{ toYaml .Values.podAnnotations | indent 8 }}
+        {{- range $key, $value := .Values.podAnnotations }}
+        {{ $key }}: {{ $value | quote }}
+        {{- end }}
     spec:
       containers:
       - name: {{ template "fullname" . }}
