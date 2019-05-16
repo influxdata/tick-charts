@@ -11,17 +11,17 @@ spec:
   type: {{ .Values.service.type }}
   ports:
   {{- if .Values.config.http.enabled }}
-  - name: api
+  - name: {{ template "apiPortName" . }}
     port: {{ .Values.config.http.bind_address }}
     targetPort: {{ .Values.config.http.bind_address }}
   {{- end }}
   {{- if .Values.config.graphite.enabled }}
-  - name: graphite
+  - name: tcp-graphite
     port: {{ .Values.config.graphite.bind_address }}
     targetPort: {{ .Values.config.graphite.bind_address }}
   {{- end }}
   {{- if .Values.config.collectd.enabled }}
-  - name: collectd
+  - name: tcp-collectd
     port: {{ .Values.config.collectd.bind_address }}
     targetPort: {{ .Values.config.collectd.bind_address }}
   {{- end }}
@@ -29,14 +29,15 @@ spec:
   - name: udp
     port: {{ .Values.config.udp.bind_address }}
     targetPort: {{ .Values.config.udp.bind_address }}
+
   {{- end }}
   {{- if .Values.config.opentsdb.enabled }}
-  - name: opentsdb
+  - name: tcp-opentsdb
     port: {{ .Values.config.opentsdb.bind_address }}
     targetPort: {{ .Values.config.opentsdb.bind_address }}
   {{- end }}
   {{- if .Values.config.rpc.enabled }}
-  - name: rpc
+  - name: http-rpc
     port: {{ .Values.config.rpc.bind_address }}
     targetPort: {{ .Values.config.rpc.bind_address }}
   {{- end }}
