@@ -52,6 +52,11 @@ tolerations: []
 ##
 affinity: {}
 
+## Pod annotations
+## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
+##
+podAnnotations: {}
+
 ## Change InfluxDB configuration paramaters below:
 ## Defaults are indicated
 ## ref: https://docs.influxdata.com/influxdb/v1.7/administration/config/
@@ -168,4 +173,3 @@ config:
     log_enabled: true
     enabled: true
     run_interval: 1s
-

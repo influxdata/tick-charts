@@ -1,5 +1,5 @@
 ## Image Settings
-## 
+##
 ## ref: https://hub.docker.com/r/library/chronograf/tags/
 image:
   repository: "chronograf"
@@ -55,10 +55,15 @@ tolerations: []
 ##
 affinity: {}
 
+## Pod annotations
+## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
+##
+podAnnotations: {}
+
 ## Configure the ingress object to hook into existing infastructure
 ## ref : http://kubernetes.io/docs/user-guide/ingress/
-## OPTIONALLY you can set .Values.ingress.secretName to set which secret to use    
-## 
+## OPTIONALLY you can set .Values.ingress.secretName to set which secret to use
+##
 ingress:
   enabled: false
   tls: false
