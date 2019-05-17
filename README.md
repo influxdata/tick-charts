@@ -8,7 +8,7 @@ This is a collection of [Helm](https://github.com/kubernetes/helm) [Charts](http
 - [telegraf-s](/telegraf-s/README.md)
 - [telegraf-ds](/telegraf-ds/README.md)
 
-### Deploy the whole stack!
+### Manual deploy of the whole stack
 
 - Have your `kubectl` tool configured for the cluster where you would like to deploy the stack.
 - Have `helm` and `tiller` installed and configured
@@ -32,9 +32,55 @@ $ kubectl get svc -w --namespace tick -l app=dash-chronograf
 - Open chronograf in your browser and configure it
   - InfluxDB URL: `http://data-influxdb.tick:8086`
   - Kapacitor URL: `http://alerts-kapacitor.tick:9092`
-  
-Or, just run `./create.sh` and let the shell script do it for you! You can also tear down the installation with `./destroy.sh`
 
+### Automated deploy of the whole stack
+
+#### Minikube
+
+Local kubernetes single-node distribution inside a VM. If you want to change the VM driver add the appropriate 
+`--vm-driver=xxx` flag to minikube start. Corresponding script changes service type to `NodeType` together with helm init and tiller deployment.
+
+##### Requirements:
+ - helm binary already installed in path
+ - To enable API bearer tokens (including service account tokens) to be used to authenticate to the kubelet’s HTTPS endpoint:
+   `minikube start --extra-config=kubelet.authentication-token-webhook=true`
+ - kubectl tool in path with working configuration
+
+#### AWS EKS:
+
+EKS requires external Loadbalancers to expose your service. Corresponding script changes service type to `LoadBalancer` 
+together with helm init and tiller deployment.
+As a result the EKS Control Plane creates external LoadBalancer(s) in public subnet and additional costs 
+to your account may be incurred.
+
+##### Requirements:
+ - helm binary already installed in path
+ - EKS cluster with available workers
+ - kubectl tool in path with working configuration
+
+#### Execution
+just run `./run.sh` and let the shell script do it for you! 
+
+`./run.sh -s $services -a $action -p $provider`
+  - Options:   
+    -s services:  The name of the component. 
+    Valid options are `influxdb`, `kapacitor`, `telegraf-s`, `telegraf-ds`, `chronograf` and `all`. Default is `all`   
+    -a action: Valid options are `create`, `destroy` and `prune_resources`. Default is `create`   
+    -p provider: Valid options are `minikube`, `aws-eks`. Default is `minikube`
+    
+##### Examples:
+ - To execute all components from `single command`:
+        
+        ./run.sh (by default it runs with: -s all -a create -p minikube)
+    	./run.sh -s all -a create -p aws-eks
+    	./run.sh -s all -a destroy -p aws-eks
+    	./run.sh -a prune_resources -p aws-eks
+        
+ - To execute `individual command`:
+ 
+        ./run.sh -s influxdb -s kapacitor -s ... -a create -p aws-eks
+        ./run.sh -s influxdb -s kapacitor -s ... -a destroy -p aws-eks
+      
 ### Usage
 
 To package any of the charts for deployment:
