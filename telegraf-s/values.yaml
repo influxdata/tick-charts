@@ -66,7 +66,7 @@ config:
     debug: false
     quiet: false
     logfile: ""
-    hostname: "telegraf-polling-service"
+    hostname: "$HOSTNAME"
     omit_hostname: false
   outputs:
     - influxdb:
@@ -136,7 +136,7 @@ config:
 ##        server: "localhost:4150"
 ##        topic: "telegraf"
 ##        data_format: "influx"
-  
+
 # CPU and System is required for chronograf
 # This may show errors in the logs, but this does not affect performance or functionality
   inputs:
@@ -400,4 +400,3 @@ config:
         metric_separator: "_"
         allowed_pending_messages: 10000
         percentile_limit: 1000
-
