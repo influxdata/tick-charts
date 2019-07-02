@@ -21,6 +21,9 @@ resources:
 ##
 tolerations: []
 
+# Pod service account
+# serviceAccountName: ""
+
 ## Exposed telegraf configuration
 ## ref: https://docs.influxdata.com/telegraf/v1.8/administration/configuration/
 config:
