@@ -21,6 +21,12 @@ resources:
 ##
 tolerations: []
 
+## Telegraf accepts environment variables in its configuration
+## ref: https://docs.influxdata.com/telegraf/latest/administration/configuration/#environment-variables
+env: {}
+  # - name: INFLUXDB_DB
+  #   value: "demo"
+
 ## Exposed telegraf configuration
 ## ref: https://docs.influxdata.com/telegraf/v1.8/administration/configuration/
 config:
