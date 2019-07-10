@@ -21,6 +21,12 @@ resources:
 ##
 tolerations: []
 
+## https://kubernetes.io/docs/tasks/manage-daemon/update-daemon-set/
+updateStrategy: {}
+  # type: RollingUpdate
+  # rollingUpdate:
+  #   maxUnavailable: 1
+
 ## Exposed telegraf configuration
 ## ref: https://docs.influxdata.com/telegraf/v1.8/administration/configuration/
 config:
