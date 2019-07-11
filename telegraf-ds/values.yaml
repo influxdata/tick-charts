@@ -21,6 +21,17 @@ resources:
 ##
 tolerations: []
 
+## Additional volumeMounts
+voumeMounts: []
+  # - name: ca-certificates
+  #   configMap:
+  #     name: ca-certificates
+
+## Additional volumes
+volumes: []
+  # - name: ca-certificates
+  #   mountPath: /etc/ssl/certs
+
 ## Exposed telegraf configuration
 ## ref: https://docs.influxdata.com/telegraf/v1.8/administration/configuration/
 config:
