@@ -33,6 +33,12 @@ nodeSelector: {}
 ##
 tolerations: []
 
+## https://kubernetes.io/docs/tasks/manage-daemon/update-daemon-set/
+updateStrategy: {}
+  # type: RollingUpdate
+  # rollingUpdate:
+  #   maxUnavailable: 1
+
 ## Affinity for pod assignment
 ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
 ##
