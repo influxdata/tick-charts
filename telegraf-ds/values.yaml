@@ -55,6 +55,7 @@ config:
         url: "https://$HOSTIP:10250"
         bearer_token: "/var/run/secrets/kubernetes.io/serviceaccount/token"
         insecure_skip_verify: true
+        tls_ca: "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
     - docker: 
         endpoint: "unix:///var/run/docker.sock"
         timeout: "5s"
@@ -62,3 +63,17 @@ config:
         total: false
         docker_label_exclude:
           - "annotation.kubernetes.io/*"
+    - prometheus:
+        urls:
+          - "http://your_prometheus_ip/metrics"
+        name_prefix: "prom_"
+        bearer_token: "/var/run/secrets/kubernetes.io/serviceaccount/token"
+        insecure_skip_verify: true
+    - cpu:
+    - system:
+    - disk:
+    - diskio:
+    - mem:
+    - processes:
+    - net:
+    - swap:
