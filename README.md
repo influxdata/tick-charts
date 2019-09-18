@@ -1,5 +1,11 @@
 # `tick-charts`
 
+## Deprecation Warning
+
+This repository is **no longer maintained**. We encourage everyone to use the charts provided in the [stable](https://github.com/helm/charts/tree/master/stable/influxdb) Helm repository.
+
+---
+
 This is a collection of [Helm](https://github.com/kubernetes/helm) [Charts](https://github.com/kubernetes/charts) for the [InfluxData](https://influxdata.com/time-series-platform) TICK stack. This repo contains the following charts:
 
 - [influxdb](/influxdb/README.md)
@@ -32,7 +38,7 @@ $ kubectl get svc -w --namespace tick -l app=dash-chronograf
 - Open chronograf in your browser and configure it
   - InfluxDB URL: `http://data-influxdb.tick:8086`
   - Kapacitor URL: `http://alerts-kapacitor.tick:9092`
-  
+
 Or, just run `./create.sh` and let the shell script do it for you! You can also tear down the installation with `./destroy.sh`
 
 ### Usage
@@ -60,5 +66,5 @@ $ helm install influx/telegraf-ds
 
 ### Contributing
 
-If you are interested in contributing to this effort, we ask that you review and sign the [Contributor License Agreement](https://www.influxdata.com/legal/).  
+If you are interested in contributing to this effort, we ask that you review and sign the [Contributor License Agreement](https://www.influxdata.com/legal/).
 There is an individual and corporate level agreement.  Please review which is right based on your situation.
