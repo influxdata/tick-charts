@@ -2,7 +2,7 @@
 
 ## Deprecation Warning
 
-This repository is **no longer maintained**. We encourage everyone to use the charts provided in the [stable](https://github.com/helm/charts/tree/master/stable/influxdb) Helm repository.
+This repository is **no longer maintained**. We encourage everyone to use the charts provided in the [stable](https://github.com/influxdata/helm-charts) Helm repository.
 
 ---
 
