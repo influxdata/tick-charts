@@ -25,34 +25,35 @@ spec:
         resources:
 {{ toYaml .Values.resources | indent 10 }}
         ports:
-        - name: api
+        - name: {{ template "apiPortName" . }}
           containerPort: {{ .Values.config.http.bind_address }}
         {{- if .Values.config.graphite.enabled }}
-        - name: graphite
+        - name: tcp-graphite
           containerPort: {{ .Values.config.graphite.bind_address }}
         {{- end }}
         {{- if .Values.config.collectd.enabled }}
-        - name: collectd
+        - name: tcp-collectd
           containerPort: {{ .Values.config.collectd.bind_address }}
         {{- end }}
         {{- if .Values.config.udp.enabled }}
         - name: udp
           containerPort: {{ .Values.config.udp.bind_address }}
+          protocol: UDP
         {{- end }}
         {{- if .Values.config.opentsdb.enabled }}
-        - name: opentsdb
+        - name: tcp-opentsdb
           containerPort: {{ .Values.config.opentsdb.bind_address }}
         {{- end }}
         livenessProbe:
           httpGet:
             path: /ping
-            port: api
+            port: {{ template "apiPortName" . }}
           initialDelaySeconds: 30
           timeoutSeconds: 5
         readinessProbe:
           httpGet:
             path: /ping
-            port: api
+            port: {{ template "apiPortName" . }}
           initialDelaySeconds: 5
           timeoutSeconds: 1
         volumeMounts:
