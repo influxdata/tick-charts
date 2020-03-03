@@ -39,6 +39,9 @@ spec:
           value: "/rootfs/proc"
         - name: "HOST_SYS"
           value: "/rootfs/sys"
+        {{- if .Values.env }}
+          {{- .Values.env | toYaml | trimSuffix "\n" | nindent 8 }}
+        {{- end }}
         volumeMounts:
         - name: varrunutmpro
           mountPath: /var/run/utmp

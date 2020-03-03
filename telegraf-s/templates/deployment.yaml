@@ -23,6 +23,10 @@ spec:
         imagePullPolicy: {{ default "" .Values.image.pullPolicy | quote }}
         resources:
 {{ toYaml .Values.resources | indent 10 }}
+        {{- if .Values.env }}
+        env:
+        {{- .Values.env | toYaml | trimSuffix "\n" | nindent 8 }}
+        {{- end }}
         volumeMounts:
         - name: config
           mountPath: /etc/telegraf
