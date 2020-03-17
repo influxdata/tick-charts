@@ -1,0 +1,74 @@
+{{if .Values.install_tick_scripts.enabled }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "fullname" . }}-init
+  labels:
+    app: {{ template "fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+data:
+  init.sh: |-
+    #!/usr/bin/env bash
+    export KAPACITOR_URL="{{ template "fullname" . }}.{{ .Release.Namespace }}:9092"
+    ls -al $TICK_DIR
+    kapacitor list tasks
+
+    echo "Loading TICK files from $TICK_DIR"
+    for f in ${TICK_DIR}/*.tick
+    do
+        name="$(basename $f)"
+        name="${name/.tick/}"
+        kapacitor define $name \
+            -type batch \
+            -dbrp telegraf.autogen \
+            -tick $f
+        kapacitor enable $name
+    done
+    echo DONE
+    kapacitor list tasks
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ template "fullname" . }}-init-job
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: {{ .Release.Name | quote }}
+    heritage: {{ .Release.Service | quote }}
+    app: {{ template "fullname" . }}
+  annotations:
+    "helm.sh/hook": post-install,post-upgrade
+spec:
+  template:
+    metadata:
+      name: "{{.Release.Name}}"
+      labels:
+        heritage: {{.Release.Service | quote }}
+        release: {{.Release.Name | quote }}
+        chart: "{{.Chart.Name}}-{{.Chart.Version}}"
+    spec:
+      restartPolicy: OnFailure
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        command: ["bash", "/init/init.sh"]
+        env:
+          - name: TICK_DIR
+            value: "{{ .Values.install_tick_scripts.tick_dir }}"
+        volumeMounts:
+        - name: alerts
+          mountPath: /tick
+        - name: init
+          mountPath: /init
+      volumes:
+      - name: alerts
+        configMap:
+          name: {{ template "fullname" . }}-alerts
+      - name: init
+        configMap:
+          name: {{ template "fullname" . }}-init
+{{- end }}

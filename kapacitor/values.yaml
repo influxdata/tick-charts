@@ -58,3 +58,11 @@ affinity: {}
 ## ref: https://docs.influxdata.com/kapacitor/v1.5/introduction/getting_started/
 ##
 influxURL: http://data-influxdb.tick:8086
+
+
+## A Kubernetes Job can be used to install TICK scripts from a specified
+## tick_dir directory, if enabled.
+##
+install_tick_scripts:
+  enabled: false
+  tick_dir: /tick
