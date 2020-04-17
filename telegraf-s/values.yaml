@@ -8,13 +8,13 @@ image:
 
 ## Configure resource requests and limits
 ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
-resources:
-  requests:
-    memory: 256Mi
-    cpu: 0.1
-  limits:
-    memory: 2Gi
-    cpu: 1
+resources: {}
+  # requests:
+  #   memory: 256Mi
+  #   cpu: 0.1
+  # limits:
+  #   memory: 2Gi
+  #   cpu: 1
 
 # Pod service account
 # serviceAccountName: ""
