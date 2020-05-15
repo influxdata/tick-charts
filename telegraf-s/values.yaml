@@ -38,6 +38,11 @@ tolerations: []
 ##
 affinity: {}
 
+## Pod annotations
+## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
+##
+podAnnotations: {}
+
 ## Configure the service for this telegraf instance. If you are running
 ## Any of the service plugins you will need this enabled
 ## Service Plugins: http_listener, statsd, tcp_listener, udp_listener
@@ -136,7 +141,7 @@ config:
 ##        server: "localhost:4150"
 ##        topic: "telegraf"
 ##        data_format: "influx"
-  
+
 # CPU and System is required for chronograf
 # This may show errors in the logs, but this does not affect performance or functionality
   inputs:
@@ -400,4 +405,3 @@ config:
         metric_separator: "_"
         allowed_pending_messages: 10000
         percentile_limit: 1000
-

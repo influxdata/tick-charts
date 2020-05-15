@@ -21,6 +21,11 @@ resources:
 ##
 tolerations: []
 
+## Pod annotations
+## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
+##
+podAnnotations: {}
+
 ## Exposed telegraf configuration
 ## ref: https://docs.influxdata.com/telegraf/v1.8/administration/configuration/
 config:
@@ -55,7 +60,7 @@ config:
         url: "https://$HOSTIP:10250"
         bearer_token: "/var/run/secrets/kubernetes.io/serviceaccount/token"
         insecure_skip_verify: true
-    - docker: 
+    - docker:
         endpoint: "unix:///var/run/docker.sock"
         timeout: "5s"
         perdevice: true
