@@ -88,7 +88,7 @@ oauth:
     client_secret: CHANGE_ME
     public_url: "" # eg. http://chronograf.foobar.com
     # This is a comma seperated list of Google Apps domains (OPTIONAL)
-    google_domains: ""
+    domains: ""
   heroku:
     enabled: false
     client_id: CHANGE_ME
