@@ -385,6 +385,9 @@ config:
 ##      zookeeper:
 ##        servers:
 ##          - "localhost:2181"
+##      zipkin:
+##        path: "/api/v1/spans"
+##        port: 9411
 ##      http_listener:
 ##        service_address: ":8186"
 ##        read_timeout: "10s"
