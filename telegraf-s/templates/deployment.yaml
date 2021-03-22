@@ -29,6 +29,9 @@ spec:
         - name: varrunutmpro
           mountPath: /var/run/utmp
           readOnly: true
+        {{- if .Values.volumeMounts }}
+          {{- .Values.volumeMounts | toYaml | trimSuffix "\n" | nindent 8 }}
+        {{- end }}
       {{- if .Values.priorityClassName }}
       priorityClassName: {{ .Values.priorityClassName }}
       {{- end }}
@@ -54,3 +57,6 @@ spec:
       - name: config
         configMap:
           name: {{ template "fullname" . }}
+      {{- if .Values.volumes }}
+        {{- .Values.volumes | toYaml | trimSuffix "\n" | nindent 6 }}
+      {{- end }}

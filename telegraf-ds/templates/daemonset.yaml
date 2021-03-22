@@ -53,6 +53,9 @@ spec:
           mountPath: /var/run/docker.sock
         - name: config
           mountPath: /etc/telegraf
+        {{- if .Values.volumeMounts }}
+          {{- .Values.volumeMounts | toYaml | trimSuffix "\n" | nindent 8 }}
+        {{- end }}
     {{- with .Values.tolerations }}
       tolerations:
 {{ toYaml . | indent 8 }}
@@ -73,3 +76,6 @@ spec:
       - name: config
         configMap:
           name: {{ template "fullname" . }}
+      {{- if .Values.volumes }}
+        {{- .Values.volumes | toYaml | trimSuffix "\n" | nindent 6 }}
+      {{- end }}

@@ -33,6 +33,17 @@ nodeSelector: {}
 ##
 tolerations: []
 
+## Additional volumeMounts
+voumeMounts: []
+  # - name: ca-certificates
+  #   configMap:
+  #     name: ca-certificates
+
+## Additional volumes
+volumes: []
+  # - name: ca-certificates
+  #   mountPath: /etc/ssl/certs
+
 ## Affinity for pod assignment
 ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
 ##
