@@ -55,10 +55,30 @@ config:
         url: "https://$HOSTIP:10250"
         bearer_token: "/var/run/secrets/kubernetes.io/serviceaccount/token"
         insecure_skip_verify: true
-    - docker: 
+    - docker:
         endpoint: "unix:///var/run/docker.sock"
         timeout: "5s"
         perdevice: true
         total: false
         docker_label_exclude:
           - "annotation.kubernetes.io/*"
+    - cpu:
+        percpu: false
+        totalcpu: true
+    - disk:
+        - ignore_fs:
+            - tmpfs
+            - devtmpfs
+            - devfs
+            - overlay
+            - aufs
+            - squashfs
+    - prometheus:
+      - prometheus.io/scrape
+    - diskio:
+    - kernel:
+    - mem:
+    - processes:
+    - swap:
+    - system:
+    - net:
